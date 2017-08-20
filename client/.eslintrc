@@ -1,0 +1,6 @@
+{
+  "extends": "@17media/eslint-config-17media/browser",
+  "rules": {
+    "no-underscore-dangle": 0
+  }
+}
