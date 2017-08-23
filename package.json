@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "React utility binding for puppeteer",
   "repository": "kevin940726/marionette",
-  "main": "build/client.js",
-  "browser": "build/client.js",
+  "main": "index.js",
+  "browser": "client.js",
   "license": "MIT",
   "authors": [
     "Kai Hao <kai.h@17.media> (https://github.com/kevin940726)"
@@ -24,7 +24,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint",
-    "build": "webpack client/index.js build/client.js",
+    "build": "webpack src/client/index.js client.js",
     "build:watch": "npm run build -- --watch"
   }
 }

@@ -8,7 +8,7 @@ class Marionette {
     this.renderer = renderer;
   }
 
-  findAll(...names) {
+  findAll(names) {
     const component = names
       .reduce((flatten, name) => [...flatten, ...name.split(' ')], [])
       .reduce((node, name) => (
@@ -28,7 +28,7 @@ class Marionette {
   }
 
   findNodeAll(...names) {
-    const dom = this.findAll(...names);
+    const dom = this.findAll(names);
 
     if (!dom) {
       return [];
@@ -38,7 +38,7 @@ class Marionette {
   }
 
   findNode(...names) {
-    const dom = this.findAll(...names);
+    const dom = this.findAll(names);
 
     if (!dom) {
       return null;
