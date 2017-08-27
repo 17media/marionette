@@ -8,43 +8,46 @@ class Marionette {
     this.renderer = renderer;
   }
 
-  findAll(names) {
-    const component = names
+  findComponents(names) {
+    const components = names
       .reduce((flatten, name) => [...flatten, ...name.split(' ')], [])
-      .reduce((node, name) => (
-        (traverseComponentTree(node, n => getDisplayName(n) === name) || [])[0]
-      ), Object.values(this.renderer.Mount._instancesByReactRootID)[0]);
+      .reduce((nodes, name) => [].concat(...nodes.map(node => (
+        traverseComponentTree(node, n => getDisplayName(n) === name)
+      ))), Object.values(this.renderer.Mount._instancesByReactRootID));
 
-    const dom = traverseComponentTree(
-      component,
-      n => typeof n._currentElement.type === 'string'
-    );
+    return Array.from(new Set(components));
+  }
 
-    if (!dom || !dom.length) {
-      return null;
-    }
+  findAll(names) {
+    const components = this.findComponents(names);
 
-    return dom;
+    const doms = components
+      .map(component => traverseComponentTree(
+        component,
+        n => typeof n._currentElement.type === 'string'
+      )[0]);
+
+    return doms;
   }
 
   findNodeAll(...names) {
-    const dom = this.findAll(names);
+    const doms = this.findAll(names);
 
-    if (!dom) {
-      return [];
+    if (!doms || !doms.length) {
+      return null;
     }
 
-    return dom.map(this.renderer.ComponentTree.getNodeFromInstance);
+    return doms.map(this.renderer.ComponentTree.getNodeFromInstance);
   }
 
   findNode(...names) {
-    const dom = this.findAll(names);
+    const dom = this.findAll(names)[0];
 
     if (!dom) {
       return null;
     }
 
-    return this.renderer.ComponentTree.getNodeFromInstance(dom[0]);
+    return this.renderer.ComponentTree.getNodeFromInstance(dom);
   }
 }
 

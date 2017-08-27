@@ -1,5 +1,5 @@
 {
-  "name": "marionette",
+  "name": "@17media/marionette",
   "version": "0.0.1",
   "description": "React utility binding for puppeteer",
   "repository": "kevin940726/marionette",
