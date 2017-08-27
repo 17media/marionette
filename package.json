@@ -1,6 +1,6 @@
 {
   "name": "@17media/marionette",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "React utility binding for puppeteer",
   "repository": "kevin940726/marionette",
   "main": "index.js",
